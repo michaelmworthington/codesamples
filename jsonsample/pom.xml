@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>net.worthington.jsonsample</groupId>
+  <artifactId>jsonsample</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>jsonsample</name>
+  <url>http://github.com/tobrien/sample-json-parsing</url>
+  <description>Sample code written by Tim O'Brian from Sonatype to parse XML and JSON using the JSON-LIB library and discussed at http://answers.oreilly.com/topic/257-how-to-parse-json-in-java/.
+  Some additional documentation as part of his Java Cookbook: https://discursive.atlassian.net/wiki/display/CJCOOK/Working+with+JSON%3A+JSON-lib</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.json-lib</groupId>
+      <artifactId>json-lib</artifactId>
+      <version>2.4</version>
+      <classifier>jdk15</classifier>
+    </dependency>
+    <dependency>
+      <groupId>xom</groupId>
+      <artifactId>xom</artifactId>
+      <version>1.1</version>
+    </dependency>
+  </dependencies>
+</project>
