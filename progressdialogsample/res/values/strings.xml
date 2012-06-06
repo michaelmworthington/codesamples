@@ -3,5 +3,7 @@
 
     <string name="hello">Hello World, NotificationTest!</string>
     <string name="app_name">Progressdialogsample</string>
+    <string name="Button01Text">Show Spinner Progress Bar</string>
+    <string name="Button02Text">Show Horizontal Progress Bar</string>
 
 </resources>
