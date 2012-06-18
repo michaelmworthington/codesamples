@@ -13,7 +13,7 @@ public class JacksonRawMapper
   {
     ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
 
-    InputStream is = JacksonRawMapper.class.getResourceAsStream("user.json");
+    InputStream is = JacksonRawMapper.class.getResourceAsStream("mcr.json");
     Map<String, Object> userData = mapper.readValue(is, Map.class);
 
     // Map<String, Object> userData = mapper.readValue(new File("D:\\user.json"), Map.class);
