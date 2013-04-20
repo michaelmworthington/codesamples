@@ -9,7 +9,6 @@ import com.google.inject.Module;
 public class DisplayModule implements Module
 {
 
-  @Override
   public void configure(Binder binder)
   {
     // We can preconfigure the classes we want to use
