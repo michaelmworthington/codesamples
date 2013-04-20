@@ -71,6 +71,10 @@ environments {
 
 // log4j configuration
 log4j = {
+    root {
+      debug()
+    }
+    
     // Example of changing the log pattern for the default console appender:
     //
     //appenders {
@@ -89,3 +93,15 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'org.grails.twitter.auth.Person'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'org.grails.twitter.auth.PersonAuthority'
+grails.plugins.springsecurity.authority.className = 'org.grails.twitter.auth.Authority'
+
+grails.plugins.springsecurity.securityConfigType = grails.plugins.springsecurity.SecurityConfigType.InterceptUrlMap
+grails.plugins.springsecurity.interceptUrlMap = [
+	'/status/**':              ['IS_AUTHENTICATED_FULLY'],
+	'/login/**':               ['IS_AUTHENTICATED_ANONYMOUSLY'],
+	'/logout/**':              ['IS_AUTHENTICATED_ANONYMOUSLY']
+]
