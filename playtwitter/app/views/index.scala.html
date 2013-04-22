@@ -1,7 +1,47 @@
-@(message: String)
+@(tweets: List[Tweet], tweetForm: Form[Tweet])
 
-@main("Welcome to Play 2.1") {
+@import helper._
+
+@main("Play Tweets") {
     
-    @play20.welcome(message, style = "Java")
+    <h1>Most Recent @tweets.size() tweets</h1>
+    
+    <ul>
+        @for(tweet <- tweets) {
+            <li>
+                @tweet.id - @tweet.tweet - @tweet.createDate 
+            </li>
+        }
+    </ul>
+    
+    <h2>Tweet</h2>
+    
+    @form(routes.Application.create()) {
+        
+        @inputText(tweetForm("tweet")) 
+        
+        <input type="submit" value="Create">
+        
+    }
+    
+@*
+    <h2>Tweet again</h2>
+    <form>
+    <input type="text" name="tweet">
+    <input type="submit" value="Tweet" id="submit">
+    </form>
+    
+<script type="text/javascript">
+$('form').submit(function() {
+  var createAction = #{jsAction @create(':tweet') }
+  $.post(createAction({tweet: $('input:first').val()}), function(data) {
+    $('ul').prepend(data);
+    $('input:first').val('');
+    });
+    return false;
+});
+
+</script> 
+*@
     
 }
