@@ -72,7 +72,7 @@ environments {
 // log4j configuration
 log4j = {
     root {
-      debug()
+      info()
     }
     
     // Example of changing the log pattern for the default console appender:

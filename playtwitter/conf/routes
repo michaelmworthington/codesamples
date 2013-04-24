@@ -4,8 +4,16 @@
 
 # Home page
 GET     /                           controllers.Application.index()
-GET     /tweets                     controllers.Application.getTweets()
-POST    /tweets                     controllers.Application.create()
+GET     /status                     controllers.TweetController.index()
+GET     /status/follow/:id          controllers.TweetController.follow(id: Long)
+POST    /status                     controllers.TweetController.updateStatus()
+POST    /searchable                 controllers.SearchableController.index()
+
+GET     /hellotweet                 controllers.TweetController.helloTweet()
+
+GET     /login                      controllers.LoginController.index()
+POST    /signup                     controllers.LoginController.submit()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

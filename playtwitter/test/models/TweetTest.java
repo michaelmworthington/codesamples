@@ -23,12 +23,12 @@ public class TweetTest
     running(fakeApplication(), new Runnable() {
       public void run()
       {
-        List<Tweet> tweets = Tweet.all();
-        Tweet t = new Tweet();
-        t.tweet = "hello world";
+        List<Status> tweets = Status.all();
+        Status t = new Status();
+        t.message = "hello world";
         t.save();
 
-        List<Tweet> tweets2 = Tweet.all();
+        List<Status> tweets2 = Status.all();
         Assert.assertEquals(tweets.size(), tweets2.size());
       }
     });

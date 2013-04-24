@@ -3,14 +3,14 @@
 
 # --- !Ups
 
-create table tweet (
+create table status (
   id                        bigint not null,
-  tweet                     varchar(255),
-  create_date               timestamp,
-  constraint pk_tweet primary key (id))
+  message                   varchar(255),
+  date_created              timestamp,
+  constraint pk_status primary key (id))
 ;
 
-create sequence tweet_seq;
+create sequence status_seq;
 
 
 
@@ -19,9 +19,9 @@ create sequence tweet_seq;
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists tweet;
+drop table if exists status;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
-drop sequence if exists tweet_seq;
+drop sequence if exists status_seq;
 

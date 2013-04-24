@@ -1,28 +1,47 @@
-@(tweets: List[Tweet], tweetForm: Form[Tweet])
+@(statuses: List[models.Status], statusForm: Form[models.Status])
 
 @import helper._
 
 @main("Play Tweets") {
     
-    <h1>Most Recent @tweets.size() tweets</h1>
     
-    <ul>
-        @for(tweet <- tweets) {
-            <li>
-                @tweet.id - @tweet.tweet - @tweet.createDate 
-            </li>
-        }
-    </ul>
-    
-    <h2>Tweet</h2>
-    
-    @form(routes.Application.create()) {
+    <div class="page-header">
+      <h1>Search For People to Follow</h1>
+    </div>
         
-        @inputText(tweetForm("tweet")) 
+        
+    <div class="searchForm">
+@*
+      @form(routes.SearchableController.index())
+      {
+*@
+<form>
+        <input type="text" id="q">
+        <input type="submit" value="Search for Users" id="search_for_users_button">
+</form>
+    </div>
+    
+    <h1>What Are You Doing?</h1>
+    @form(routes.TweetController.updateStatus()) {
+        
+        @inputText(statusForm("message")) 
         
         <input type="submit" value="Create">
         
     }
+
+    <b>Most Recent @statuses.size() tweets</b>
+    
+        @for(tweet <- statuses) {
+					<div class="statusMessage">
+						<strong> @tweet.id said </strong> @tweet.message <br />
+						<div class="statusMessageTime">
+							at
+							@tweet.dateCreated
+						</div>
+					</div>
+				}
+    
     
 @*
     <h2>Tweet again</h2>

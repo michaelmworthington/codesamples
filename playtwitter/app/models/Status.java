@@ -11,7 +11,7 @@ import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
 @Entity
-public class Tweet extends Model
+public class Status extends Model
 {
   private static final long serialVersionUID = 6024233673337099432L;
 
@@ -19,22 +19,22 @@ public class Tweet extends Model
   public Long id;
   @Required
   @MaxLength(10)
-  public String tweet;
-  public Date createDate = new Date();
+  public String message;
+  public Date dateCreated = new Date();
   
-  public static Finder<Long, Tweet> find             = new Finder<Long, Tweet>(Long.class, Tweet.class);
+  public static Finder<Long, Status> find             = new Finder<Long, Status>(Long.class, Status.class);
 
-  public static List<Tweet> all()
+  public static List<Status> all()
   {
     return find.all();
   }
 
-  public static List<Tweet> findLatest()
+  public static List<Status> findLatest()
   {
-    return find.order("id desc").setMaxRows(10).findList();
+    return find.order("date_created desc").setMaxRows(10).findList();
   }
 
-  public static void create(Tweet task)
+  public static void create(Status task)
   {
     task.save();
   }
