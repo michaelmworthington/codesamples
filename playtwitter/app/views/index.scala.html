@@ -1,37 +1,43 @@
-@(statuses: List[models.Status], statusForm: Form[models.Status])
+@(userCount: Integer, loggedInUser: models.User, statuses: List[models.Status], statusForm: Form[models.Status], userForm: Form[models.User])
 
 @import helper._
 
 @main("Play Tweets") {
+    <script type="text/javascript" src="@routes.TweetController.javascriptRoutes()"></script>
     
-    
-    <div class="page-header">
-      <h1>Search For People to Follow</h1>
+    <div class="row">
+	    <div class="span6">
+		    @if(loggedInUser != null) {
+		      <strong> Welcome @loggedInUser.username</strong>
+		    }
+	    </div>
+
+      <div class="span6">
+          <strong> @userCount Twitters</strong>
+      </div>
     </div>
+
+	  <h1>Search For People to Follow</h1>
+	  @helper.form(action = routes.UserSearch.submit(), 'class -> "form-search") {
+	    <div class="input-append">
+	      <input type="text" class="input-medium search-query" id="username" name="username" />
+	      <button type="submit" class="btn btn-primary" id="search_for_users_button">Search for Users</button>
+	    </div>
+	  }
         
         
-    <div class="searchForm">
-@*
-      @form(routes.SearchableController.index())
-      {
-*@
-<form>
-        <input type="text" id="q">
-        <input type="submit" value="Search for Users" id="search_for_users_button">
-</form>
-    </div>
-    
     <h1>What Are You Doing?</h1>
-    @form(routes.TweetController.updateStatus()) {
-        
-        @inputText(statusForm("message")) 
-        
-        <input type="submit" value="Create">
+    @form(action = routes.TweetController.updateStatus(), 'class -> "form-search") {
+      <div class="input-append">
+        <input type="text" class="input-medium search-query" id="message" name="message" />
+        <button type="submit" class="btn btn-primary" id="tweet_button">Update Status</button>
+      </div>
         
     }
 
-    <b>Most Recent @statuses.size() tweets</b>
-    
+    <div class="row">
+      <div class="span6">
+        <b>Most Recent @statuses.size() tweets</b>
         @for(tweet <- statuses) {
 					<div class="statusMessage">
 						<strong> @tweet.id said </strong> @tweet.message <br />
@@ -41,7 +47,16 @@
 						</div>
 					</div>
 				}
-    
+      </div>
+
+	    <div class="span6">
+        <b>Following @loggedInUser.followers.size() users</b><br/>
+        @for(followed <- loggedInUser.followers) {
+            <i class="icon-user"></i> @followed.username <br />
+        }
+	    </div>
+				
+    </div>
     
 @*
     <h2>Tweet again</h2>
@@ -49,6 +64,7 @@
     <input type="text" name="tweet">
     <input type="submit" value="Tweet" id="submit">
     </form>
+    
     
 <script type="text/javascript">
 $('form').submit(function() {

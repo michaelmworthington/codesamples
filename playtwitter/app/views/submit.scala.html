@@ -1,5 +1,5 @@
 @(created: User)
 @main("Example"){
-  @created.username
-  @created.password
+  <h1>Search Results</h1>
+  @created.username - <a href="@routes.UserSearch.follow(created.username)">follow</a>
 }

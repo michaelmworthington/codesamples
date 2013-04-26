@@ -13,15 +13,15 @@ import play.db.ebean.Model;
 @Entity
 public class Status extends Model
 {
-  private static final long serialVersionUID = 6024233673337099432L;
+  private static final long          serialVersionUID = 6024233673337099432L;
 
   @Id
-  public Long id;
+  public Long                        id;
   @Required
   @MaxLength(10)
-  public String message;
-  public Date dateCreated = new Date();
-  
+  public String                      message;
+  public Date                        dateCreated      = new Date();
+
   public static Finder<Long, Status> find             = new Finder<Long, Status>(Long.class, Status.class);
 
   public static List<Status> all()

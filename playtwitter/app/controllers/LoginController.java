@@ -5,8 +5,8 @@ import models.User;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.*;
-
+import views.html.login;
+import views.html.submit;
 
 public class LoginController extends Controller
 {
