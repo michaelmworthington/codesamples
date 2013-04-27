@@ -8,16 +8,19 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
+import play.mvc.Security;
 
+@Security.Authenticated(Secured.class)
 public class TweetController extends Controller
 {
   static Form<models.Status> statusForm = Form.form(models.Status.class);
   static Form<User>          userForm   = Form.form(User.class);
 
+  
   public static Result index()
   {
     List<User> allUsers = User.all();
-    User loggedInUser = User.findByName("mike");
+    User loggedInUser = User.findByName(request().username());
 
     List<models.Status> tweets = currentUserTimeline();
     return ok(index.render(allUsers.size(), loggedInUser, tweets, statusForm, userForm));

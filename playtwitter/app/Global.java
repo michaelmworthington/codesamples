@@ -15,6 +15,7 @@ public class Global extends GlobalSettings
     {
       User loggedInUser = new User();
       loggedInUser.username = "mike";
+      loggedInUser.password = "password";
       loggedInUser.follow("mary");
       loggedInUser.follow("joe");
       User.create(loggedInUser);

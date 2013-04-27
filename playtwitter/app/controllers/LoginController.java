@@ -10,17 +10,52 @@ import views.html.submit;
 
 public class LoginController extends Controller
 {
-  final static Form<User> userForm = form(User.class);
-
-  public static Result index()
+  public static Result login()
   {
-    return ok(login.render(userForm));
+    return ok(login.render(form(Login.class)));
   }
 
-  public static Result submit()
+  public static Result authenticate()
   {
-    Form<User> filledForm = userForm.bindFromRequest();
-    User created = filledForm.get();
-    return ok(submit.render(created));
+    Form<Login> loginForm = form(Login.class).bindFromRequest();
+    if (loginForm.hasErrors())
+    {
+      return badRequest(login.render(loginForm));
+    }
+    else
+    {
+      session().clear();
+      session("username", loginForm.get().username);
+      return redirect(routes.TweetController.index());
+    }
+  }
+
+  /**
+   * Logout and clean the session.
+   */
+  public static Result logout()
+  {
+    session().clear();
+    flash("success", "You've been logged out");
+    return redirect(routes.LoginController.login());
+  }
+
+  // -- Authentication
+
+  public static class Login
+  {
+
+    public String username;
+    public String password;
+
+    public String validate()
+    {
+      if (User.authenticate(username, password) == null)
+      {
+        return "Invalid user or password";
+      }
+      return null;
+    }
+
   }
 }

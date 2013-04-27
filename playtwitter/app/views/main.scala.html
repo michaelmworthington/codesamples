@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(title: String, loggedInUser: models.User)(content: Html)
 
 <!DOCTYPE html>
 
@@ -86,6 +86,13 @@
 	                </li>
 	              </ul>
 	            </div><!--/.nav-collapse -->
+	            <div class="pull-right">
+                @if(loggedInUser != null) {
+                   @loggedInUser.username <a class="btn btn-danger" href="@routes.LoginController.logout">Log Out</a>
+                } else {
+                   <a class="btn btn-success" href="@routes.LoginController.login">Log In</a>
+                }
+	            </div>
 	          </div>
 	        </div>
 	      </div>

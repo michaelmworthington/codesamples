@@ -4,31 +4,33 @@ import models.User;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.submit;
+import play.mvc.Security;
+import views.html.*;
+import static play.data.Form.*;
 
+@Security.Authenticated(Secured.class)
 public class UserSearch extends Controller
 {
-  final static Form<User> userForm = Form.form(User.class);
-
   public static Result submit()
   {
-    Form<User> filledForm = userForm.bindFromRequest();
-    User created = filledForm.get();
-    return ok(submit.render(created));
+    Form<UserSearchForm> loginForm = form(UserSearchForm.class).bindFromRequest();
+    User searchresult = User.findByName(loginForm.get().username);
+    User currentUser = User.findByName(request().username());
+    return ok(submit.render(currentUser, searchresult));
   }
 
   public static Result follow(String pUsername)
   {
-    User currentUser = getUser("mike");
+    User currentUser = User.findByName(request().username());
     currentUser.follow(pUsername);
     currentUser.save();
 
     return redirect(routes.TweetController.index());
   }
 
-  private static models.User getUser(String pUsername)
+  public static class UserSearchForm
   {
-    return User.findByName(pUsername);
+    public String username;
   }
 
 }

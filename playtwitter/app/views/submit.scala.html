@@ -1,5 +1,12 @@
-@(created: User)
-@main("Example"){
+@(currentUser: User, created: User)
+@main("Example", currentUser){
+
   <h1>Search Results</h1>
-  @created.username - <a href="@routes.UserSearch.follow(created.username)">follow</a>
+   @if(created != null) {
+     @created.username - <a href="@routes.UserSearch.follow(created.username)">follow</a>
+   } else {
+     <div class="alert alert-error">
+       ERROR: User not found
+     </div>
+   }
 }

@@ -24,6 +24,9 @@ public class User extends Model
   @Required
   public String                    username;
   
+  @Required
+  public String                    password;
+  
   @ManyToMany(cascade=CascadeType.ALL)
   @JoinTable(name = "friends",
              joinColumns = @JoinColumn(name = "friend_id", referencedColumnName = "id"),
@@ -40,11 +43,17 @@ public class User extends Model
     {
       follow = new User();
       follow.username = pName;
+      follow.password = "password";
       User.create(follow);
     }
     followers.add(follow);
   }
 
+  public static User authenticate(String email, String password)
+  {
+    return find.where().eq("username", email).eq("password", password).findUnique();
+  }
+  
   public static List<User> all()
   {
     return find.all();

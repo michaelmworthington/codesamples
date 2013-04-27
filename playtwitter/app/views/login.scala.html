@@ -1,4 +1,4 @@
-@(userForm: Form[User])
+@(userForm: Form[LoginController.Login])
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -37,11 +37,22 @@
 
     </style>
     
-@main("User Form Example") {
+@main("User Form Example", null) {
 
-      @helper.form(action = routes.LoginController.submit(),'class -> "form-signin"){
+      @helper.form(action = routes.LoginController.authenticate(),'class -> "form-signin"){
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" class="input-block-level" placeholder="Email address" name="username">
+				@if(userForm.hasGlobalErrors) {
+				    <div class="alert alert-error">
+				        @userForm.globalError.message
+				    </div>
+				}
+				@if(flash.contains("success")) {
+            <div class="alert alert-info">
+			        @flash.get("success")
+			    </div>
+  			}
+
+        <input type="text" class="input-block-level" placeholder="Email address" name="username" value="@userForm("username").value">
         <input type="password" class="input-block-level" placeholder="Password" name="password">
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
