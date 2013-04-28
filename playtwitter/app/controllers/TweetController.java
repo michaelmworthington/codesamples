@@ -1,5 +1,7 @@
 package controllers;
 
+import static play.data.Form.form;
+
 import java.util.List;
 
 import models.User;
@@ -7,7 +9,7 @@ import play.Routes;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.index;
+import views.html.*;
 import play.mvc.Security;
 
 @Security.Authenticated(Secured.class)
@@ -41,6 +43,15 @@ public class TweetController extends Controller
     }
   }
 
+  public static Result ajaxUpdateStatus()
+  {
+    models.Status t = new models.Status();
+    t.message = form().bindFromRequest().get("message");
+    t.save();
+
+    return ok(tweetdisplay.render(t));
+  }
+
   public static Result helloTweet()
   {
     models.Status t = new models.Status();
@@ -48,12 +59,6 @@ public class TweetController extends Controller
     t.save();
 
     return ok("Tweeted: hello world");
-  }
-
-  public static Result javascriptRoutes()
-  {
-    response().setContentType("text/javascript");
-    return ok(Routes.javascriptRouter("myJsRoutes", routes.javascript.TweetController.updateStatus()));
   }
 
   private static List<models.Status> currentUserTimeline()

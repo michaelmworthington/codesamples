@@ -4,14 +4,16 @@
 
 # Home page
 GET     /                           controllers.Application.index()
+GET     /javascriptRoutes           controllers.Application.javascriptRoutes()
 
 GET     /status                     controllers.TweetController.index()
 POST    /status                     controllers.TweetController.updateStatus()
+POST    /ajaxstatus                 controllers.TweetController.ajaxUpdateStatus()
 GET     /hellotweet                 controllers.TweetController.helloTweet()
-GET     /javascriptRoutes           controllers.TweetController.javascriptRoutes()
 
 GET     /usersearch/follow/:id      controllers.UserSearch.follow(id: String)
 POST    /usersearch                 controllers.UserSearch.submit()
+POST    /ajaxsearch                 controllers.UserSearch.ajaxsearch()
 
 GET     /login                      controllers.LoginController.login()
 POST    /login                      controllers.LoginController.authenticate()

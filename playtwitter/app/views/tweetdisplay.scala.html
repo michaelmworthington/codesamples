@@ -1,0 +1,9 @@
+@(tweet: models.Status)
+
+          <div class="statusMessage">
+            <strong> @tweet.id said </strong> @tweet.message <br />
+            <div class="statusMessageTime">
+              at
+              @tweet.dateCreated
+            </div>
+          </div>

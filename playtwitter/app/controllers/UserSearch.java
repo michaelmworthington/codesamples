@@ -19,6 +19,12 @@ public class UserSearch extends Controller
     return ok(submit.render(currentUser, searchresult));
   }
 
+  public static Result ajaxsearch()
+  {
+    User searchresult = User.findByName(form().bindFromRequest().get("username"));
+    return ok(ajaxsubmit.render(searchresult));
+  }
+
   public static Result follow(String pUsername)
   {
     User currentUser = User.findByName(request().username());

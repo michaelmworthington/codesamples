@@ -1,0 +1,12 @@
+@(searchresult: User)
+
+   @if(searchresult != null) {
+     <div class="well well-large">
+        @searchresult.username - <a href="@routes.UserSearch.follow(searchresult.username)">follow</a>
+     </div>
+   } else {
+     <div class="alert alert-error">
+       ERROR: User not found
+     </div>
+   }
+

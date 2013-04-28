@@ -3,13 +3,14 @@
 @import helper._
 
 @main("Play Tweets", loggedInUser) {
-    <script type="text/javascript" src="@routes.TweetController.javascriptRoutes()"></script>
     
     @if(statusForm.hasErrors) {
         <div class="alert-message error">
             <p><strong>Oops</strong> Please fix all errors</p>
         </div>
     }
+    
+    <div id="errors"></div>
 
     <div class="row">
       <div class="span6 pull-right">
@@ -18,16 +19,49 @@
     </div>
 
 	  <h3>Search For People to Follow</h3>
-	  @helper.form(action = routes.UserSearch.submit(), 'class -> "form-search") {
+	  @helper.form(action = routes.UserSearch.submit(), 'class -> "form-search", 'id -> "usersearchform") {
 	    <div class="input-append">
 	      <input type="text" class="input-medium search-query" id="username" name="username" />
-	      <button type="submit" class="btn btn-primary" id="search_for_users_button">Search for Users</button>
+        <button type="submit" class="btn btn-primary" id="search_for_users_button">Search for Users</button>
 	    </div>
 	  }
-        
-        
+
+    <div id="user_search_result"></div>
+
+    <script type="text/javascript">
+            $('#search_for_users_button').click(function(evt) {
+                $('#errors').html("");
+					      jsRoutes.controllers.UserSearch.ajaxsearch().ajax({
+					        data : $('#usersearchform').serialize(),
+					        success : function(data) {$('#user_search_result').html(data);},
+					        error : function(data) {$('#errors').html(data.responseText);}
+					      });
+					      return false;
+            });
+    </script>
+<!-- 
+    <script type="text/javascript">
+				$('#search_for_users_button').click(function(evt) {
+				        $('#errors').html("");
+				        $.ajax({
+				            type : 'POST',
+				            url : "@routes.UserSearch.ajaxsearch",
+				            data : $('#usersearchform').serialize(),
+				            dataType : "text",
+				            success : function(data) {
+                        $('#user_search_result').html(data);
+				            },
+				            error : function(data) {
+				                $('#errors').html(data.responseText);
+				            }
+				        });
+				        return false;
+				    });
+    </script>
+ -->
+    
     <h3>What Are You Doing?</h3>
-    @form(action = routes.TweetController.updateStatus(), 'class -> "form-search") {
+    @form(action = routes.TweetController.updateStatus(), 'class -> "form-search", 'id -> "updatestatusform") {
       <div class="input-append">
         <input type="text" class="input-medium search-query" id="message" name="message" />
         <button type="submit" class="btn btn-primary" id="tweet_button">Update Status</button>
@@ -35,18 +69,27 @@
         
     }
 
+    <script type="text/javascript">
+            $('#tweet_button').click(function(evt) {
+                jsRoutes.controllers.TweetController.ajaxUpdateStatus().ajax({
+                  data : $('#updatestatusform').serialize(),
+                  success : function(data) {$('#statusMessages').prepend(data);
+                                            $('#message').val("");
+                                            $('#message').focus();},
+                  error : function(data) {$('#errors').html(data.responseText);}
+                });
+                return false;
+            });
+    </script>
+
     <div class="row">
       <div class="span6">
         <b>Most Recent @statuses.size() tweets</b>
-        @for(tweet <- statuses) {
-					<div class="statusMessage">
-						<strong> @tweet.id said </strong> @tweet.message <br />
-						<div class="statusMessageTime">
-							at
-							@tweet.dateCreated
-						</div>
-					</div>
-				}
+        <div id="statusMessages">
+	        @for(tweet <- statuses) {
+	          @tweetdisplay(tweet)
+					}
+				</div>
       </div>
 
 	    <div class="span6">
