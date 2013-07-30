@@ -1,0 +1,16 @@
+@(message: String) 
+
+@main("Up and Running with AngularJS - Lynda") {
+    <div class="container" ng-controller="AppCtrl">
+    
+        <h1>@message</h1>
+
+        <ul class="nav nav-pills">
+            <li ng-class="destinationsActive"><a href="#">Destinations</a></li>
+            <li ng-class="flightsActive"><a href="#/flights">Flights</a></li>
+            <li ng-class="reservationsActive"><a href="#/reservations">Reservations</a></li>
+        </ul>
+    
+        <div ng-view></div>
+    </div>
+}

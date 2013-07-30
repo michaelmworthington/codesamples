@@ -1,0 +1,34 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html ng-app="airline">
+<head>
+<title>@title</title>
+
+<!-- Libraries -->
+<!-- script src="@routes.Assets.at("/public","javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script-->
+<script type="text/javascript" src="@routes.Assets.at("/public","javascripts/lib/angular-1.0.7.min.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("/public","javascripts/lib/angular-resource-1.0.7.min.js")"></script>
+
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("/public","stylesheets/bootstrap.min.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("/public","stylesheets/bootstrap-responsive.min.css")">
+
+<!-- My Code -->
+<script type="text/javascript" src="@routes.Assets.at("/public","javascripts/controllers/app.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("/public","javascripts/controllers/destinations.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("/public","javascripts/controllers/flights.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("/public","javascripts/controllers/reservations.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("/public","javascripts/controllers/airport.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("/public","javascripts/app.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("/public","javascripts/services.js")"></script>
+
+<link rel="stylesheet" media="screen" href="@routes.Assets.at("/public","stylesheets/main.css")">
+<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("/public","images/favicon.png")">
+
+
+</head>
+<body>
+    @content
+</body>
+</html>
