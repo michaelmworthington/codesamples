@@ -19,12 +19,13 @@ pipeline {
       steps {
         script {
                 nodeHome = tool 'NodeJS 9.11.1 - Auto Install'
+                echo "node home: ${nodeHome}"
                 def statusCode = 0
                 statusCode = sh returnStatus: true, script: 'which npm'
                 echo "which npm status: ${statusCode}"
                 statusCode = sh returnStatus: true, script: 'which node'
                 echo "which node status: ${statusCode}"
-                statusCode = sh returnStatus: true, script: '${nodeHome}/bin/npm --version'
+                statusCode = sh returnStatus: true, script: "${nodeHome}/bin/npm --version"
                 echo "npm version status: ${statusCode}"
         }
       }
