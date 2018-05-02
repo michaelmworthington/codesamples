@@ -50,9 +50,12 @@ mvn clean package'''
         }
       }
     }
-    stage('Node') {
+    stage('Node Docker') {
+      agent {
+              docker { image 'node:7-alpine' }
+      }
       steps {
-        sh 'npm --version'
+         sh 'node --version'
       }
     }
   }
