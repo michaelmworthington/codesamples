@@ -6,6 +6,13 @@ pipeline {
 
   }
   stages {
+    stage('define tools') {
+      agent any
+      steps {
+        tool 'NodeJS 9.11.1 - Auto Install'
+        tool 'Docker - Local PATH'
+      }
+    }
     stage('Build') {
       steps {
         sh '''cd mavensample
@@ -24,12 +31,6 @@ mvn clean package'''
             echo 'Run Checkstyle'
           }
         }
-      }
-    }
-    stage('define tools') {
-      agent any
-      steps {
-        tool 'NodeJS 9.11.1 - Auto Install'
       }
     }
     stage('Node') {
