@@ -1,19 +1,30 @@
 pipeline {
-  agent {
-    docker {
-      image 'maven:3.5.0-jdk-8'
-    }
+  agent any
 
+  tools { 
+    maven 'Maven 3.3.9 - Auto Install' 
+    jdk 'JDK 8u66 - Auto Install' 
   }
+  
   stages {
-    stage('define tools') {
-      agent any
+    stage ('Initialize') {
+        steps {
+            sh '''
+                echo "PATH = ${PATH}"
+                echo "M2_HOME = ${M2_HOME}"
+            ''' 
+        }
+    }
+    stage('define npm tool') {
       steps {
         tool 'NodeJS 9.11.1 - Auto Install'
-        tool 'Docker - Local PATH'
+        
+        def statusCode = sh returnStatus:true, script: 'npm --version'
+        echo "npm version status code: ${statusCode}"
+        
       }
     }
-    stage('Build') {
+    stage('Maven Build') {
       steps {
         sh '''cd mavensample
 mvn clean package'''
