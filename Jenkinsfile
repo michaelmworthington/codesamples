@@ -18,10 +18,8 @@ pipeline {
     stage('define npm tool') {
       steps {
         tool 'NodeJS 9.11.1 - Auto Install'
+        sh 'npm --version'
       }
-      def statusCode = sh returnStatus:true, script: 'npm --version'
-      echo "npm version status code: ${statusCode}"
-
     }
     stage('Maven Build') {
       steps {
