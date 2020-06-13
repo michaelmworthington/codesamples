@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>SONATYPE.MyPackage</id>
+        <version>1.0.4</version>
+        <authors>IEUser</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>My package description.</description>
+        <!-- Dependencies are automatically installed when the package is installed -->
+        <dependencies>
+          <dependency id="Newtonsoft.Json" version="9.0" />
+        </dependencies>
+      </metadata>
+
+      <!-- A readme.txt will be displayed when the package is installed -->
+      <files>
+        <file src="readme.txt" target="" />
+
+        <!-- on mac, content doesn't get picked up by default. have to specify it with the forward slash vs backslash -->
+        <file src="content/**/*.*" target="" />
+      </files>
+  </package>

@@ -1,0 +1,16 @@
+{
+  "name": "pandi-notes-app",
+  "version": "2.0.0",
+  "description": "my first node app",
+  "main": "index.js",
+  "dependencies": {
+    "execa": "0.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js --title='RUN SCRIPT' --body='RUN BODY' "
+  },
+  "author": "pandi",
+  "license": "ISC"
+}
