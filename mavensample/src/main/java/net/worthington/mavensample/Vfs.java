@@ -17,7 +17,8 @@ public class Vfs {
         FileSystemManager fsManager;
         try {
             fsManager = VFS.getManager();
-            FileObject directoryFileObject = fsManager.resolveFile("file:///Users/mworthington/Downloads/tmp2");
+            // FileObject directoryFileObject = fsManager.resolveFile("file:///Users/mworthington/Downloads/tmp2");
+            FileObject directoryFileObject = fsManager.resolveFile("file://C:/Users/mworthington/Downloads/tmp");
             System.out.println(directoryFileObject.getName().getBaseName());
 
             FileObject[] fileObjects = directoryFileObject.findFiles(new AllFileSelector() {
